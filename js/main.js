@@ -1,25 +1,7 @@
-window.writeResultsToConsole = function (executedCode) {
-    window
-        .streamsApi
-        .setUserCodeExecutedThusFar({executedCode});
-}
+$('[data-action="run"]').click(function(){
+    window.exec(editor.getValue());
+});
 
-window.exec = function (code) {
-    try {
-        window._exec(code);
-    } catch (e) {
-        window
-            .streamsApi
-            .setUserCodeExecutedThusFar({
-                executedCode: e.toString(),
-                isError: true
-            });
-    }
-}
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/xcode");
-editor.getSession().setMode("ace/mode/python");
-editor.setOptions({
-    fontSize: '18px'
+$('[data-action="clear-console"]').click(function(){
+    window.clearConsole();
 });
