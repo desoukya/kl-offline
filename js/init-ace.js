@@ -6,6 +6,7 @@ const initAce = function() {
     editor.setOptions({
         fontSize: '18px'
     });
+    window.editor = editor;
 };
 
 initAce();
