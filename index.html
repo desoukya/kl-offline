@@ -1,6 +1,11 @@
 <html>
 
 <head>
+
+  <title>Kodinglab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="./img/favicon.ico?v=2">
+
   <!-- BRYTHON SCRIPTS -->
   <script type="text/javascript" src="./js/brython/src/brython_builtins.js"></script>
   <script type="text/javascript" src="./js/brython/src/version_info.js"></script>
@@ -34,17 +39,35 @@
 
   <script type="text/javascript" src="./js/brython/src/brython_stdlib.js"></script>
 
+  <!-- FONTAWESOME -->
+  <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">  
+
   <!-- STYLE SHEETS -->
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/editor.css">
-
+  <link rel="stylesheet" href="./css/console.css">
 </head>
 
 <body onload="brython()">
-  <div id="editor">
+  <div class="nav">
+    <img src="./img/logo.png" class="nav-logo" alt="">
+  </div>
+  <div class="container">
+    <div class="editor-container">
+      <div class="editor-controls">
+        <a class="editor-btn">
+          Run <i class="fa fa-play"></i>
+        </a>
+      </div>
+      <div id="editor" class="editor">
+      </div>
+    </div>
+    <div class="console-container">
+      <div id="console" class="console">
+      </div>
+    </div>
   </div>
 </body>
-
 
 <!-- SCRIPTS -->
 

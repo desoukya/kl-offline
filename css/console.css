@@ -1,0 +1,6 @@
+.console-container {
+    height: 100%;
+    width: 100%;
+    background: #020F33;
+    flex: 0.8;
+}
