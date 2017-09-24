@@ -1,0 +1,76 @@
+<html>
+
+<head>
+  <!-- BRYTHON SCRIPTS -->
+  <script type="text/javascript" src="./js/brython/src/brython_builtins.js"></script>
+  <script type="text/javascript" src="./js/brython/src/version_info.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py2js.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_object.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_type.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_utils.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_sort.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_builtin_functions.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_exceptions.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_range_slice.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_bytes.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_set.js"></script>
+  <script type="text/javascript" src="./js/brython/src/js_objects.js"></script>
+  <script type="text/javascript" src="./js/brython/src/stdlib_paths.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_import.js"></script>
+
+  <script type="text/javascript" src="./js/brython/src/unicode.min.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_string.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_int.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_long_int.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_float.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_complex.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_dict.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_list.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_generator.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_dom.js"></script>
+
+  <script type="text/javascript" src="./js/brython/src/builtin_modules.js"></script>
+  <script type="text/javascript" src="./js/brython/src/py_import_hooks.js"></script>
+
+  <script type="text/javascript" src="./js/brython/src/brython_stdlib.js"></script>
+
+  <!-- STYLE SHEETS -->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/editor.css">
+
+</head>
+
+<body onload="brython()">
+  <div id="editor">
+  </div>
+</body>
+
+
+<!-- SCRIPTS -->
+
+<!-- ACE EDITOR -->
+
+<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/ace.js"></script>
+<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/mode-python.js"></script>
+<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/theme-ambiance.js"></script>
+<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/theme-xcode.js"></script>
+
+<!-- MAIN -->
+<script type="text/javascript" src="./js/main.js"></script>
+
+<!-- PYTHON -->
+<script type="text/python">
+  from browser import window
+  import sys
+
+  def write(data):
+    window.writeResultsToConsole('%s' % data)
+
+  def _exec(code):
+    sys.stdout.write = write
+    exec(code)
+
+  window._exec = _exec
+</script>
+
+</html>
