@@ -29,8 +29,8 @@
     line-height: 10px;
 }
 
-.editor-container > .editor-controls > .editor-btn:hover > .fa {
-    color: rbg(121, 151, 165);
+.editor-container > .editor-controls > .editor-btn:hover {
+    color: rgb(121, 151, 165);
 }    
 
 .editor-container > .editor-controls > .editor-btn > .fa {

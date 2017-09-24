@@ -17,6 +17,7 @@ window.exec = function (code) {
     }
 }
 
+// Initialize ace
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/xcode");
 editor.getSession().setMode("ace/mode/python");
