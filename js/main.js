@@ -13,6 +13,9 @@ $(".resizable").css('width', 100/numberOfCol +'%');
 var sibTotalWidth;
 $(".resizable").resizable({
     handles: 'e',
+    create: function() {
+        $('.ui-resizable-e').append('<div class="inner"></div>');
+    },
     start: function(event, ui){
         sibTotalWidth = ui.originalSize.width + ui.originalElement.next().outerWidth();
     },

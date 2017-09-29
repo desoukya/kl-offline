@@ -211,6 +211,7 @@
     overflow-x: hidden;
     background: rgb(14, 22, 40);
     padding: 15px 15px;
+    padding-top: 50px;
     color: #F4FFFF;
     display: block;
     font-family: monospace !important;
