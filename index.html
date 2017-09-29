@@ -7,46 +7,50 @@
   <link rel="icon" sizes="16x16 32x32 64x64" href="./img/favicon.ico?v=2">
 
   <!-- BRYTHON SCRIPTS -->
-  <script type="text/javascript" src="./js/brython/src/brython_builtins.js"></script>
-  <script type="text/javascript" src="./js/brython/src/version_info.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py2js.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_object.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_type.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_utils.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_sort.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_builtin_functions.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_exceptions.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_range_slice.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_bytes.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_set.js"></script>
-  <script type="text/javascript" src="./js/brython/src/js_objects.js"></script>
-  <script type="text/javascript" src="./js/brython/src/stdlib_paths.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_import.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/brython_builtins.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/version_info.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py2js.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_object.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_type.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_utils.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_sort.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_builtin_functions.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_exceptions.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_range_slice.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_bytes.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_set.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/js_objects.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/stdlib_paths.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_import.js"></script>
 
-  <script type="text/javascript" src="./js/brython/src/unicode.min.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_string.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_int.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_long_int.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_float.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_complex.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_dict.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_list.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_generator.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_dom.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/unicode.min.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_string.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_int.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_long_int.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_float.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_complex.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_dict.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_list.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_generator.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_dom.js"></script>
 
-  <script type="text/javascript" src="./js/brython/src/builtin_modules.js"></script>
-  <script type="text/javascript" src="./js/brython/src/py_import_hooks.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/builtin_modules.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_import_hooks.js"></script>
 
-  <script type="text/javascript" src="./js/brython/src/brython_stdlib.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/brython_stdlib.js"></script>
   
   <!-- JQUERY -->
-  <script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="./lib/jquery/jquery.min.js"></script>
   
+  <!-- JQUERY-UI -->
+  <link rel="stylesheet" href="./lib/jquery-ui/jquery-ui.min.css">    
+  <script type="text/javascript" src="./lib/jquery-ui/jquery-ui.min.js"></script>
+
   <!-- JQCONSOLE -->
-  <script type="text/javascript" src="./js/jqconsole/jqconsole.js"></script>
+  <script type="text/javascript" src="./lib/jqconsole/jqconsole.js"></script>
 
   <!-- FONTAWESOME -->
-  <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">  
+  <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">  
 
   <!-- STYLE SHEETS -->
   <link rel="stylesheet" href="./css/main.css">
@@ -61,31 +65,33 @@
   <div class="nav">
     <img src="./img/logo.png" class="nav-logo" alt="">
   </div>
-  <div class="container">
-    <div class="editor-container">
+  <table class="wrapper">
+    <tr>
+    <td class="editor-container resizable">
       <div class="editor-controls">
         <a class="editor-btn" data-action="run">
           Run <i class="fa fa-play"></i>
         </a>
       </div>
       <div id="editor" class="editor"></div>
-    </div>
-    <div class="console-container">
+    </td>
+    <td class="console-container">
       <div id="console" class="console">
         <a class="jqconsole-btn" data-action="clear-console">Clear</a>
       </div>
-    </div>
-  </div>
+    </td>
+    </tr>
+  </table>
 </body>
 
 <!-- SCRIPTS -->
 
 <!-- ACE EDITOR -->
 
-<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/ace.js"></script>
-<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/mode-python.js"></script>
-<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/theme-ambiance.js"></script>
-<script type="text/javascript" src="./js/ace-builds/src-min-noconflict/theme-xcode.js"></script>
+<script type="text/javascript" src="./lib/ace-builds/src-min-noconflict/ace.js"></script>
+<script type="text/javascript" src="./lib/ace-builds/src-min-noconflict/mode-python.js"></script>
+<script type="text/javascript" src="./lib/ace-builds/src-min-noconflict/theme-ambiance.js"></script>
+<script type="text/javascript" src="./lib/ace-builds/src-min-noconflict/theme-xcode.js"></script>
 
 <!-- MAIN -->
 <script type="text/javascript" src="./js/init-brython.js"></script>
