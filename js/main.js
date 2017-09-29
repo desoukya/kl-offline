@@ -40,44 +40,52 @@ $('#console *').css({
     fontSize: 14
 });
 
+const updateConsoleFontSize = function(value) {
+    $('#console *').css({
+        fontSize: value
+    });
+    $('.jqconsole-cursor').css({
+        height: value + 1,
+        width: parseInt(value * 2 / 3, 10) - 1
+    });
+    $('.jqconsole-btn').css({
+        width: parseInt((value * 100) / 14, 10),
+        height: parseInt((value * 29) / 14, 10)
+    });
+};
+
+const updateEditorFontSize = function(value) {
+    editor.setOptions({
+        fontSize: `${value}px`
+    });
+    const controlsHeight = parseInt((value * 40) / 18, 10); 
+    $('.editor-controls').css({
+        height: controlsHeight
+    });
+    $('#editor').css('height', '100%');
+    $('#editor').css('height', `-=${controlsHeight}px`);   
+    editor.resize();    
+    $('.editor-btn').css({
+        width: parseInt((value * 118) / 18, 10),
+        height: parseInt((value * 29) / 18, 10),
+        fontSize: value - 4
+    });
+}
+
 $("#consoleFont").slider({
     step: 1,
     min: 14,
-    max: 34,
+    max: 30,
     slide: function(event, ui) {
-        $('#console *').css({
-            fontSize: ui.value
-        });
-        $('.jqconsole-cursor').css({
-            height: ui.value + 1,
-            width: parseInt(ui.value * 2 / 3, 10) - 1
-        });
-        $('.jqconsole-btn').css({
-            width: parseInt((ui.value * 100) / 14, 10),
-            height: parseInt((ui.value * 29) / 14, 10)
-        });
+        updateConsoleFontSize(ui.value);
     }
 });
 
 $("#editorFont").slider({
     step: 1,
     min: 18,
-    max: 38,
+    max: 30,
     slide: function(event, ui) {
-        editor.setOptions({
-            fontSize: `${ui.value}px`
-        });
-        const controlsHeight = parseInt((ui.value * 40) / 18, 10); 
-        $('.editor-controls').css({
-            height: controlsHeight
-        });
-        $('#editor').css('height', '100%');
-        $('#editor').css('height', `-=${controlsHeight}px`);   
-        editor.resize();    
-        $('.editor-btn').css({
-            width: parseInt((ui.value * 118) / 18, 10),
-            height: parseInt((ui.value * 29) / 18, 10),
-            fontSize: ui.value - 4
-        });
+        updateEditorFontSize(ui.value);
     }
 });
