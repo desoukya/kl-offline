@@ -11,7 +11,15 @@ const header = 'Powered by Kodinglab\n' + `[Python 3.5.2] - ${dateToString}\n\n`
 // on console input call back
 const onInputCallBack = function (stdin) {
     setTimeout(() => {
-        window.exec(stdin);
+        if(stdin.length === 0) {
+            return false;
+        }
+        stdin = stdin.replace(new RegExp('\'', 'g'), '"');
+        try {
+            window._exec(`print(eval('${stdin}'))`);                            
+        } catch (error) {
+            return false;
+        }
     }, 0);
     return false;
 };

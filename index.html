@@ -40,7 +40,7 @@
   <script type="text/javascript" src="./lib/brython/src/brython_stdlib.js"></script>
   
   <!-- JQUERY -->
-  <script type="text/javascript" src="./lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
   
   <!-- JQUERY-UI -->
   <link rel="stylesheet" href="./lib/jquery-ui/jquery-ui.min.css">    
@@ -48,6 +48,10 @@
 
   <!-- JQCONSOLE -->
   <script type="text/javascript" src="./lib/jqconsole/jqconsole.js"></script>
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">  
+  <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- FONTAWESOME -->
   <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">  
@@ -62,8 +66,14 @@
 </head>
 
 <body onload="brython()">
-  <div class="nav">
-    <img src="./img/logo.png" class="nav-logo" alt="">
+  <div class="navigation">
+    <img src="./img/logo.png" class="navigation-logo" alt="">
+    <div class="slider-container">
+      <label for="editorFont">Editor Font</label>
+      <div id="editorFont" class="slider"></div>
+      <label for="consoleFont">Console Font</label>
+      <div id="consoleFont" class="slider"></div>
+    </div>
   </div>
   <table class="wrapper">
     <tr>
