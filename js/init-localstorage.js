@@ -1,6 +1,6 @@
 let CURRENT_SESSION_INDEX = undefined;
 
-const loadSessionCodeToEditor = function(sessionIndex) {
+const loadSession = function(sessionIndex) {
     const SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
     var session = SESSIONS[sessionIndex] || {};
     var code = session.code || '';
@@ -30,29 +30,6 @@ const deleteSession = function(sessionIndex) {
     loadAllSessionsToModal();
 };
 
-
-const handleDeleteAction = function(sessionIndex) {
-    swal({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to revert this!',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#898b8e',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        confirmButtonClass: 'btn btn-danger',
-        cancelButtonClass: 'btn btn-default',
-        buttonsStyling: false
-    }).then(function() {
-        deleteSession(sessionIndex);
-    }, function(dismiss) {
-        // dismiss can be 'cancel', 'overlay',
-        // 'close', and 'timer'
-        return false;
-    });
-}
-
 const loadAllSessionsToModal = function(sessionIndex) {
     const SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
     $('#sessions-container').empty();
@@ -67,7 +44,7 @@ const loadAllSessionsToModal = function(sessionIndex) {
         $('[data-action="load-session"').click(function(event) {
             let sessionIndex = $(event.currentTarget).attr('data-id') || 0;
             sessionIndex = parseInt(sessionIndex, 10);
-            loadSessionCodeToEditor(sessionIndex);
+            loadSession(sessionIndex);
             $('#sessionsModal').modal('hide');
         });
 
@@ -80,10 +57,6 @@ const loadAllSessionsToModal = function(sessionIndex) {
     } else {
         $('#sessions-container').append('<h4 class="text-center">There are no sessions to load!</h4>');
     }
-}
-
-const generateNewSessionName = function() {
-    return 'Session-' + moment().format('MMMM-D-Y-{HH:mm}');
 }
 
 const saveSession = function({
@@ -114,10 +87,43 @@ const saveSession = function({
             });
     }
     localStorage.setItem('SESSIONS', JSON.stringify(SESSIONS));
-    loadSessionCodeToEditor(sessionIndex);
+    loadSession(sessionIndex);
 }
 
-const handleSaveAction = function(sessionIndex) {
+const newSession = function() {
+    editor.setValue('', 1);
+    localStorage.removeItem('CURRENT_SESSION_INDEX');
+    CURRENT_SESSION_INDEX = undefined;
+    $('#session-title').text('');
+}
+
+// HANDLERS
+
+const handleDeleteAction = function(sessionIndex) {
+    swal({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#898b8e',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        confirmButtonClass: 'btn btn-danger',
+        cancelButtonClass: 'btn btn-default',
+        buttonsStyling: false
+    }).then(function() {
+        deleteSession(sessionIndex);
+    }, function(dismiss) {
+        // dismiss can be 'cancel', 'overlay',
+        // 'close', and 'timer'
+        return false;
+    });
+}
+
+
+const handleSaveAction = function() {
+    const sessionIndex = loadCurrentSessionIndex();
     if (sessionIndex >= 0) {
         saveSession({
             sessionIndex
@@ -144,13 +150,6 @@ const handleSaveAction = function(sessionIndex) {
     }
 }
 
-const newSession = function() {
-    editor.setValue('', 1);
-    localStorage.removeItem('CURRENT_SESSION_INDEX');
-    CURRENT_SESSION_INDEX = undefined;
-    $('#session-title').text('');
-}
-
 const handleNewAction = function() {
     if (CURRENT_SESSION_INDEX === undefined && editor.getValue().length === 0) {
         newSession();
@@ -171,19 +170,31 @@ const handleNewAction = function() {
 
 }
 
+
+// HELPERS
+
 const loadCurrentSessionIndex = function() {
     let index = localStorage.getItem('CURRENT_SESSION_INDEX');
     return index !== undefined && index !== null ? parseInt(index, 10) : undefined;
 }
 
+const generateNewSessionName = function() {
+    return 'Session-' + moment().format('MMMM-D-Y-{HH:mm}');
+}
+
+
+// MAIN
+
 if (typeof(Storage) !== 'undefined') {
     // Code for localStorage/sessionStorage.
     CURRENT_SESSION_INDEX = loadCurrentSessionIndex();
     if (CURRENT_SESSION_INDEX >= 0) {
-        loadSessionCodeToEditor(CURRENT_SESSION_INDEX);
+        loadSession(CURRENT_SESSION_INDEX);
     }
-    
-    window.saveSession = () => handleSaveAction(CURRENT_SESSION_INDEX);
+
+    window.loadSession = (index) => loadSession(index);
+
+    window.saveSession = () => handleSaveAction();
 
     window.newSession = () => handleNewAction();
 
