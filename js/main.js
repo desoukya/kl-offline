@@ -16,6 +16,7 @@ $('[data-action="new"]').click(function() {
 });
 $('[data-action="load-sessions-to-modal"').click(function() {
     window.loadAllSessionsToModal();
+    $('#sessionsModal').modal('show');
 });
 
 $(window).bind('keydown', 'ctrl+s', function(event) {
@@ -41,3 +42,5 @@ $('.dropdown.keep-open').on({
     "click":             function() { this.closable = true; },
     "hide.bs.dropdown":  function() { return this.closable; }
 });
+
+$('[data-toggle="tooltip"]').tooltip(); 
