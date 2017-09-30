@@ -155,7 +155,7 @@ if (typeof(Storage) !== 'undefined') {
         handleSaveAction(CURRENT_SESSION_INDEX);
     });
     $('[data-action="new"]').click(function() {
-        if(CURRENT_SESSION_INDEX === undefined) {
+        if(CURRENT_SESSION_INDEX === undefined && editor.getValue().length === 0) {
             handleNewAction();
         } else {
             swal({
