@@ -1,12 +1,14 @@
-let CURRENT_SESSION_INDEX = undefined;
+let CURRENT_ACTIVE_SESSION_INDEX = undefined;
+let EDITOR_FONT_SIZE = undefined;
+let CONSOLE_FONT_SIZE = undefined;
 
 const loadSession = function(sessionIndex) {
     const SESSIONS = loadSessionsArray();
     var session = SESSIONS[sessionIndex] || {};
     var code = session.code || '';
     editor.setValue(code, 1);
-    localStorage.setItem('CURRENT_SESSION_INDEX', sessionIndex);
-    CURRENT_SESSION_INDEX = sessionIndex;
+    localStorage.setItem('CURRENT_ACTIVE_SESSION_INDEX', sessionIndex);
+    CURRENT_ACTIVE_SESSION_INDEX = sessionIndex;
     $('#session-title').text(session.name);
 };
 
@@ -15,17 +17,17 @@ const deleteSession = function(sessionIndex) {
     let SESSIONS = loadSessionsArray();
     SESSIONS.splice(sessionIndex, 1);
     localStorage.setItem('SESSIONS', JSON.stringify(SESSIONS));
-    if (CURRENT_SESSION_INDEX === undefined) {
+    if (CURRENT_ACTIVE_SESSION_INDEX === undefined) {
         return true;
     }
-    if (CURRENT_SESSION_INDEX === sessionIndex) {
+    if (CURRENT_ACTIVE_SESSION_INDEX === sessionIndex) {
         editor.setValue('', 1);
-        localStorage.removeItem('CURRENT_SESSION_INDEX');
-        CURRENT_SESSION_INDEX = undefined;
+        localStorage.removeItem('CURRENT_ACTIVE_SESSION_INDEX');
+        CURRENT_ACTIVE_SESSION_INDEX = undefined;
         $('#session-title').text('');
-    } else if (CURRENT_SESSION_INDEX > sessionIndex) {
-        CURRENT_SESSION_INDEX = CURRENT_SESSION_INDEX - 1;
-        localStorage.setItem('CURRENT_SESSION_INDEX', CURRENT_SESSION_INDEX);
+    } else if (CURRENT_ACTIVE_SESSION_INDEX > sessionIndex) {
+        CURRENT_ACTIVE_SESSION_INDEX = CURRENT_ACTIVE_SESSION_INDEX - 1;
+        localStorage.setItem('CURRENT_ACTIVE_SESSION_INDEX', CURRENT_ACTIVE_SESSION_INDEX);
     }
     loadAllSessionsToModal();
 };
@@ -91,8 +93,8 @@ const saveSession = function({
 
 const newSession = function() {
     editor.setValue('', 1);
-    localStorage.removeItem('CURRENT_SESSION_INDEX');
-    CURRENT_SESSION_INDEX = undefined;
+    localStorage.removeItem('CURRENT_ACTIVE_SESSION_INDEX');
+    CURRENT_ACTIVE_SESSION_INDEX = undefined;
     $('#session-title').text('');
 }
 
@@ -150,7 +152,7 @@ const handleSaveAction = function() {
 }
 
 const handleNewAction = function() {
-    if (CURRENT_SESSION_INDEX === undefined && editor.getValue().length === 0) {
+    if (CURRENT_ACTIVE_SESSION_INDEX === undefined && editor.getValue().length === 0) {
         newSession();
     } else {
         swal({
@@ -170,7 +172,7 @@ const handleNewAction = function() {
 }
 
 const handleLoadAction = function(index) {
-    if (CURRENT_SESSION_INDEX === index || (CURRENT_SESSION_INDEX === undefined && editor.getValue().length === 0)) {
+    if (CURRENT_ACTIVE_SESSION_INDEX === index || (CURRENT_ACTIVE_SESSION_INDEX === undefined && editor.getValue().length === 0)) {
         loadSession(index);
         $('#sessionsModal').modal('hide');        
     } else {
@@ -193,8 +195,26 @@ const handleLoadAction = function(index) {
 // HELPERS
 
 const loadCurrentSessionIndex = function() {
-    let index = localStorage.getItem('CURRENT_SESSION_INDEX');
+    let index = localStorage.getItem('CURRENT_ACTIVE_SESSION_INDEX');
     return index !== undefined && index !== null ? parseInt(index, 10) : undefined;
+}
+
+const loadEditorFontSize = function() {
+    let fontSize = localStorage.getItem('EDITOR_FONT_SIZE');
+    return fontSize !== undefined && fontSize !== null ? parseInt(fontSize, 10) : undefined;
+}
+
+const loadConsoleFontSize = function() {
+    let fontSize = localStorage.getItem('CONSOLE_FONT_SIZE');
+    return fontSize !== undefined && fontSize !== null ? parseInt(fontSize, 10) : undefined;
+}
+
+const saveEditorFontSize = function(value) {
+    localStorage.setItem('EDITOR_FONT_SIZE', value);    
+}
+
+const saveConsoleFontSize = function(value) {
+    localStorage.setItem('CONSOLE_FONT_SIZE', value);    
 }
 
 const loadSessionsArray = function() {
@@ -214,12 +234,23 @@ const generateNewSessionName = function() {
 
 if (typeof(Storage) !== 'undefined') {
     // Code for localStorage/sessionStorage.
-    CURRENT_SESSION_INDEX = loadCurrentSessionIndex();
-    if (CURRENT_SESSION_INDEX >= 0) {
-        loadSession(CURRENT_SESSION_INDEX);
+    
+    CURRENT_ACTIVE_SESSION_INDEX = loadCurrentSessionIndex();
+    if (CURRENT_ACTIVE_SESSION_INDEX >= 0) {
+        loadSession(CURRENT_ACTIVE_SESSION_INDEX);
     }
 
-    window.loadSession = (index) => handleLoadAction(index);
+    EDITOR_FONT_SIZE = loadEditorFontSize();
+    if (EDITOR_FONT_SIZE >= 0) {
+        window.updateEditorFontSize(EDITOR_FONT_SIZE);
+    }
+
+    CONSOLE_FONT_SIZE = loadConsoleFontSize();
+    if (CONSOLE_FONT_SIZE >= 0) {
+        window.updateConsoleFontSize(CONSOLE_FONT_SIZE);
+    }    
+
+    window.loadSession = index => handleLoadAction(index);
 
     window.saveSession = () => handleSaveAction();
 
@@ -227,6 +258,10 @@ if (typeof(Storage) !== 'undefined') {
 
     window.loadAllSessionsToModal = () => loadAllSessionsToModal();
 
+    window.saveEditorFontSize = value => saveEditorFontSize(value);
+
+    window.saveConsoleFontSize = value => saveConsoleFontSize(value);
+    
 } else {
     // Sorry! No Web Storage support..
     swal({
