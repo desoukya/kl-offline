@@ -208,4 +208,5 @@ if (typeof(Storage) !== 'undefined') {
         icon: "warning",
         dangerMode: true,
     });
+    $('.session-btn').hide();
 }

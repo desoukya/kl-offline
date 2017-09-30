@@ -9,14 +9,20 @@ $('[data-action="run"]').click(function() {
 // SESSIONS EVENTS 
 
 $('[data-action="save"]').click(function() {
-    window.saveSession();
+    if (window.saveSession) {
+        window.saveSession();
+    }
 });
 $('[data-action="new"]').click(function() {
-    window.newSession();
+    if (window.newSession) {
+        window.newSession();
+    }
 });
 $('[data-action="load-sessions-to-modal"').click(function() {
-    window.loadAllSessionsToModal();
-    $('#sessionsModal').modal('show');
+    if (window.loadAllSessionsToModal) {
+        window.loadAllSessionsToModal();
+        $('#sessionsModal').modal('show');
+    }
 });
 
 $(window).bind('keydown', 'ctrl+s', function(event) {
