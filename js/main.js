@@ -35,12 +35,12 @@ $('#console').bind('keydown', 'ctrl+l', function(event) {
     window.clearConsole();
 });
 
-// SETTINGS EVENTS
+// BOOTSTRAP
 
-$('.dropdown.keep-open').on({
-    "shown.bs.dropdown": function() { this.closable = false; },
-    "click":             function() { this.closable = true; },
-    "hide.bs.dropdown":  function() { return this.closable; }
+// Prevent dropdown from closing on click inside
+$(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
 });
 
-$('[data-toggle="tooltip"]').tooltip(); 
+
+$('[data-toggle="tooltip"]').tooltip();
