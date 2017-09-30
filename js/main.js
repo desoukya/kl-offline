@@ -6,6 +6,22 @@ $('[data-action="run"]').click(function() {
     window.exec(editor.getValue());
 });
 
+editor.on('input', (change) => {
+    const syntaxError = window.lint(editor.getValue());
+    if(syntaxError) {
+      this.editor.getSession().setAnnotations([
+        {
+          row: syntaxError.row,
+          column: syntaxError.col,
+          text: syntaxError.message,
+          type: 'error'
+        }
+      ]);
+    } else {
+      this.editor.getSession().setAnnotations([]);
+    }
+});
+
 // SESSIONS EVENTS 
 
 $('[data-action="save"]').click(function() {
