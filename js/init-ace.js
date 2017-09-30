@@ -7,6 +7,7 @@ const initAce = function() {
         fontSize: '18px'
     });
     window.editor = editor;
+    editor.$blockScrolling = Infinity // To disable warning message
 };
 
 initAce();

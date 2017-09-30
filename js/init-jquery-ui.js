@@ -60,7 +60,16 @@ const updateEditorFontSize = function(value) {
         height: parseInt((value * 29) / 18, 10),
         fontSize: value - 4
     });
-}
+};
+
+window.updateConsoleFontSize = value => {
+    $("#consoleFont").slider('value', value);
+    updateConsoleFontSize(value);
+};
+window.updateEditorFontSize = value => {
+    $("#editorFont").slider('value', value);
+    updateEditorFontSize(value);
+};
 
 $("#consoleFont").slider({
     step: 1,
@@ -68,6 +77,7 @@ $("#consoleFont").slider({
     max: 30,
     slide: function(event, ui) {
         updateConsoleFontSize(ui.value);
+        window.saveConsoleFontSize(ui.value);
     }
 });
 
@@ -77,5 +87,6 @@ $("#editorFont").slider({
     max: 30,
     slide: function(event, ui) {
         updateEditorFontSize(ui.value);
+        window.saveEditorFontSize(ui.value);        
     }
 });

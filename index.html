@@ -107,18 +107,18 @@
     <tr>
       <td class="editor-container resizable">
         <div class="editor-controls">
-          <a class="btn btn-rounded editor-btn" data-action="run">
+          <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Run" data-placement="bottom" data-action="run">
               <i class="fa fa-play"></i>
-            </a>
-          <a class="btn btn-rounded editor-btn" data-action="new">
+          </button>
+          <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="New" data-placement="bottom" data-action="new">
               <i class="fa fa-plus"></i>
-          </a>
-          <a class="btn btn-rounded editor-btn" data-action="save">
+          </button>
+          <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Save [Ctrl+S]" data-placement="bottom" data-action="save">
               <i class="fa fa-save"></i>
-          </a>
-          <a class="btn btn-rounded editor-btn" data-action="load" data-toggle="modal" data-target="#sessionsModal">
+          </button>
+          <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Load" data-placement="bottom" data-action="load-sessions-to-modal">
                 <i class="fa fa-folder-open-o"></i>
-          </a>
+          </button>
 
         </div>
         <div id="editor" class="editor"></div>
