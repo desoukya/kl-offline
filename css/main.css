@@ -1,3 +1,8 @@
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -5,19 +10,94 @@ body {
     height: 100%;
 }
 
-.nav {
+.navigation {
     height: 59px;
     border-bottom: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.navigation>.navigation-left{
+    display: flex;
+    align-items: center;    
 }
 
-.nav > .nav-logo {
+.navigation>.navigation-left>.navigation-logo {
     margin-left: 20px;
     height: 40px;
 }
 
-.container {
+.navigation>.navigation-center>.navigation-title{}
+
+.navigation>.navigation-right{
+    width: 50px;
+}
+
+.navigation>.navigation-right>.dropdown>.navigation-settings-icon{
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 20px;
+    color: #4D4C4C;
+    transition: all 0.3s;
+}
+.navigation>.navigation-right>.dropdown>.dropdown-menu{
+    left: auto;
+    right: 30px;
+    padding: 20px;
+    width: 300px;
+}
+
+.navigation>.navigation-right>.dropdown>.navigation-settings-icon:hover{
+    color: gray;
+}
+
+.wrapper {
     height: calc(100% - 60px);
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.ui-resizable-e {
+    background-color: rgb(221, 221, 221);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(221, 221, 221);
+    flex: 1 0 auto;
+    cursor: col-resize;
+    width: 12px;
+}
+
+.ui-resizable-e>.inner {
+    width: 1px;
+    height: 25px;
+    background-color: rgb(119, 120, 121);
+    -webkit-transition: background-color 0.1s;
+    -moz-transition: background-color 0.1s;
+    transition: background-color 0.3s;
+}
+
+.ui-resizable-e:hover>.inner {
+    background-color: rgb(0, 0, 0);
+}
+
+.slider-container>.slider-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.slider-container>.slider-content>.slider {
+    width: 100px;
+    margin: 0 20px;
+    float: right;
+}
+
+.swal2-buttonswrapper >.btn{
+    margin: 0 10px;
 }

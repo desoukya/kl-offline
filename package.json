@@ -1,16 +1,19 @@
 {
-  "name": "@skykode/kl-brython",
+  "name": "@skykode/kl-offline",
   "version": "0.1.0",
-  "description": "KL Brython",
-  "scripts": {
-  },
+  "description": "KL Offline",
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git@github.com:skykode/kl-brython.git"
+    "url": "git@github.com:skykode/kl-offline.git"
   },
   "author": "SKYKODE LLC",
   "dependencies": {
+    "bootstrap": "3.3.7",
+    "jquery": "3.2.1",
+    "moment": "^2.18.1",
+    "popper.js": "1.12.5",
+    "sweetalert2": "6.9.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

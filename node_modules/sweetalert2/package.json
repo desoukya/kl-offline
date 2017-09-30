@@ -1,0 +1,171 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "sweetalert2@6.9.1",
+        "scope": null,
+        "escapedName": "sweetalert2",
+        "name": "sweetalert2",
+        "rawSpec": "6.9.1",
+        "spec": "6.9.1",
+        "type": "version"
+      },
+      "/home/abkreno/workspace/sk-workspace/kl-brython"
+    ]
+  ],
+  "_from": "sweetalert2@6.9.1",
+  "_id": "sweetalert2@6.9.1",
+  "_inCache": true,
+  "_location": "/sweetalert2",
+  "_nodeVersion": "8.1.4",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/sweetalert2-6.9.1.tgz_1506085314846_0.0316362741868943"
+  },
+  "_npmUser": {
+    "name": "limonte",
+    "email": "limon.monte@gmail.com"
+  },
+  "_npmVersion": "5.0.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "sweetalert2@6.9.1",
+    "scope": null,
+    "escapedName": "sweetalert2",
+    "name": "sweetalert2",
+    "rawSpec": "6.9.1",
+    "spec": "6.9.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-6.9.1.tgz",
+  "_shasum": "2fa57eb9310777e07e6f11baf63cc8a42f61dbe7",
+  "_shrinkwrap": null,
+  "_spec": "sweetalert2@6.9.1",
+  "_where": "/home/abkreno/workspace/sk-workspace/kl-brython",
+  "author": {
+    "name": "Limon Monte",
+    "email": "limon.monte@gmail.com",
+    "url": "https://limonte.github.io"
+  },
+  "bugs": {
+    "url": "https://github.com/limonte/sweetalert2/issues"
+  },
+  "contributors": [
+    {
+      "name": "Morgan Touverey-Quilling",
+      "email": "mtouverey@alembic-dev.com",
+      "url": "https://github.com/toverux"
+    },
+    {
+      "name": "Johan Fagerberg",
+      "url": "https://github.com/birjolaxew"
+    },
+    {
+      "name": "Sam Turrell",
+      "email": "sam@samturrell.co.uk",
+      "url": "https://github.com/samturrell"
+    },
+    {
+      "name": "Joseph Schultz",
+      "url": "https://github.com/acupajoe"
+    },
+    {
+      "name": "Patrick H. Lauke",
+      "url": "https://github.com/patrickhlauke"
+    }
+  ],
+  "dependencies": {},
+  "description": "A beautiful, responsive, customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes, supported fork of sweetalert",
+  "devDependencies": {
+    "babel-core": "latest",
+    "babel-plugin-external-helpers": "latest",
+    "babel-plugin-transform-object-assign": "latest",
+    "babel-preset-es2015": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-clean-css": "latest",
+    "gulp-rename": "latest",
+    "gulp-rollup": "latest",
+    "gulp-sass": "latest",
+    "gulp-sass-lint": "latest",
+    "gulp-standard": "^8.0.0",
+    "gulp-uglify": "latest",
+    "rollup": "latest",
+    "rollup-plugin-babel": "latest",
+    "standard": "^8.0.0",
+    "testem": "latest",
+    "uglify-js": "latest"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-VzxO+oq4XgfnGd/wVJsAce/1lfEUyX6zIQZ4bnPaNue1coTFDodsqwLBKGpzYex8/uuZexbc3GenVeZDQguf5g==",
+    "shasum": "2fa57eb9310777e07e6f11baf63cc8a42f61dbe7",
+    "tarball": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-6.9.1.tgz"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "sweetalert2.d.ts"
+  ],
+  "gitHead": "dc06f15eda3eaa89c2ef63ef9016fbf6232b4521",
+  "homepage": "https://limonte.github.io/sweetalert2/",
+  "jsnext:main": "src/sweetalert2.js",
+  "keywords": [
+    "sweetalert",
+    "sweetalert2",
+    "alert",
+    "prompt"
+  ],
+  "license": "MIT",
+  "main": "dist/sweetalert2.js",
+  "maintainers": [
+    {
+      "name": "birjolaxew",
+      "email": "johanringmann@gmail.com"
+    },
+    {
+      "name": "jdcrensh",
+      "email": "jdcrensh@gmail.com"
+    },
+    {
+      "name": "limonte",
+      "email": "limon.monte@gmail.com"
+    },
+    {
+      "name": "samturrell",
+      "email": "sam@samturrell.co.uk"
+    },
+    {
+      "name": "toverux",
+      "email": "mtouverey@methodinthemadness.eu"
+    }
+  ],
+  "name": "sweetalert2",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limonte/sweetalert2.git"
+  },
+  "scripts": {
+    "assume-dist-unchanged": "git ls-files dist | tr '\\n' ' ' | xargs git update-index --assume-unchanged",
+    "no-assume-dist-unchanged": "git ls-files dist | tr '\\n' ' ' | xargs git update-index --no-assume-unchanged",
+    "test": "testem ci"
+  },
+  "standard": {
+    "ignore": [
+      "dist/"
+    ],
+    "global": [
+      "MutationObserver"
+    ]
+  },
+  "types": "sweetalert2.d.ts",
+  "version": "6.9.1"
+}

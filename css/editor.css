@@ -1,14 +1,18 @@
 .editor-container {
+    width: 50%;
     height: 100%;
-    width: 100%;
-    flex: 1;
+    background-color: white;    
+    z-index: 1000;
 }
 
 .editor-container > .editor-controls {
     height: 40px;
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
     display: flex;
     align-items: center;
+    background-color: white;
+    z-index: 1000;
 }
 
 .editor-container > .editor-controls > .editor-btn {
@@ -17,25 +21,23 @@
     align-items: center;
     box-sizing: border-box;
     height: 29px;
-    width: 118px;
+    width: 39px;
     font-size: 15px;
     font-family: Questrial;
     color: rgb(118, 119, 119);
     border: 1px solid rgb(237, 237, 237);
+    border-radius: 360px;
     outline: 0px;
     background-color: rgb(245, 245, 245);
     cursor: pointer;
-    margin: 0 auto;
+    margin: 0 10px;
     line-height: 10px;
+    text-decoration: none;
 }
 
 .editor-container > .editor-controls > .editor-btn:hover {
     color: rgb(121, 151, 165);
 }    
-
-.editor-container > .editor-controls > .editor-btn > .fa {
-    margin-left: 5px;
-}
 
 .editor-container > .editor {
     height: calc(100% - 40px);
