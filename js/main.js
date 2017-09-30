@@ -1,9 +1,12 @@
+jQuery.hotkeys.options.filterInputAcceptingElements = false;
+
 // EDITOR EVENTS
+
 $('[data-action="run"]').click(function() {
     window.exec(editor.getValue());
 });
 
-// SESSIONS 
+// SESSIONS EVENTS 
 
 $('[data-action="save"]').click(function() {
     window.saveSession();
@@ -13,6 +16,11 @@ $('[data-action="new"]').click(function() {
 });
 $('[data-action="load-sessions-to-modal"').click(function() {
     window.loadAllSessionsToModal();
+});
+
+$(window).bind('keydown', 'ctrl+s', function(event) {
+    event.preventDefault();
+    window.saveSession();
 });
 
 // CONSOLE EVENTS
@@ -26,10 +34,10 @@ $('#console').bind('keydown', 'ctrl+l', function(event) {
     window.clearConsole();
 });
 
+// SETTINGS EVENTS
+
 $('.dropdown.keep-open').on({
     "shown.bs.dropdown": function() { this.closable = false; },
     "click":             function() { this.closable = true; },
     "hide.bs.dropdown":  function() { return this.closable; }
 });
-
-jQuery.hotkeys.options.filterInputAcceptingElements = false;
