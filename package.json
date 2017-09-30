@@ -11,8 +11,8 @@
   "dependencies": {
     "bootstrap": "3.3.7",
     "jquery": "3.2.1",
-    "jquery.hotkeys": "^0.1.0",
-    "moment": "^2.18.1",
+    "jquery.hotkeys": "0.1.0",
+    "moment": "2.18.1",
     "popper.js": "1.12.5",
     "sweetalert2": "6.9.1"
   },
