@@ -9,14 +9,14 @@ const dateToString = date.toLocaleTimeString('en-US', options);
 const header = 'Powered by Kodinglab\n' + `[Python 3.5.2] - ${dateToString}\n\n`;
 
 // on console input call back
-const onInputCallBack = function (stdin) {
+const onInputCallBack = function(stdin) {
     setTimeout(() => {
-        if(stdin.length === 0) {
+        if (stdin.length === 0) {
             return false;
         }
         try {
             const stdinModified = stdin.replace(new RegExp('\'', 'g'), '"');
-            window._exec(`print(eval('${stdinModified}'))`);                            
+            window._exec(`print(eval('${stdinModified}'))`);
         } catch (error) {
             window.exec(stdin);
             return false;
@@ -26,14 +26,14 @@ const onInputCallBack = function (stdin) {
 };
 
 // config
-const config = function (jqconsole) {
+const config = function(jqconsole) {
     jqconsole.RegisterMatching('{', '}', 'brace');
     jqconsole.RegisterMatching('(', ')', 'paran');
     jqconsole.RegisterMatching('[', ']', 'bracket');
 }
 
 // Initialize jqconsole
-const initJqConsole = function () {
+const initJqConsole = function() {
     this.jqconsole = $(`#console`).jqconsole(header, ' >  ');
     config(this.jqconsole);
 
@@ -47,10 +47,13 @@ const initJqConsole = function () {
     handler();
 };
 
-window.setUserCodeExecutedThusFar = function ({executedCode, isError}) {
-    var className = isError
-        ? 'jqconsole-error'
-        : 'jqconsole-results';
+window.setUserCodeExecutedThusFar = function({
+    executedCode,
+    isError
+}) {
+    var className = isError ?
+        'jqconsole-error' :
+        'jqconsole-results';
     if (executedCode.length > 0 && executedCode.slice(-1) !== '\n') {
         executedCode += '\n';
     }
@@ -62,19 +65,23 @@ window.setUserCodeExecutedThusFar = function ({executedCode, isError}) {
         .Focus();
 };
 
-window.focus = function () {
+window.focus = function() {
     this
         .jqconsole
         .Focus();
 };
 
-window.clearConsole = function () {
+window.clearConsole = function() {
     this
         .jqconsole
         .Clear();
     this
         .jqconsole
         .Write(header, 'jqconsole-header');
+    this
+        .jqconsole
+        .Focus();
+
 };
 
 initJqConsole();
