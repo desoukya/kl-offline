@@ -38,60 +38,119 @@
   <script type="text/javascript" src="./lib/brython/src/py_import_hooks.js"></script>
 
   <script type="text/javascript" src="./lib/brython/src/brython_stdlib.js"></script>
-  
+
   <!-- JQUERY -->
   <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
-  
+
   <!-- JQUERY-UI -->
-  <link rel="stylesheet" href="./lib/jquery-ui/jquery-ui.min.css">    
+  <link rel="stylesheet" href="./lib/jquery-ui/jquery-ui.min.css">
   <script type="text/javascript" src="./lib/jquery-ui/jquery-ui.min.js"></script>
 
   <!-- JQCONSOLE -->
   <script type="text/javascript" src="./lib/jqconsole/jqconsole.js"></script>
 
+
+  <!-- MOMENT -->
+  
+  <script type="text/javascript" src="./node_modules/moment/min/moment.min.js"></script>
+  
+  <!-- SWEET ALERT -->
+  <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
+  <script type="text/javascript" src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>  
+  
   <!-- BOOTSTRAP -->
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- FONTAWESOME -->
-  <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">  
+  <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
 
   <!-- STYLE SHEETS -->
+  <link rel="stylesheet" href="./css/components/card.css">  
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/editor.css">
-  <link rel="stylesheet" href="./css/_jqconsole.css">  
+  <link rel="stylesheet" href="./css/_jqconsole.css">
   <link rel="stylesheet" href="./css/console.css">
 
-  
 </head>
 
 <body onload="brython()">
   <div class="navigation">
-    <img src="./img/logo.png" class="navigation-logo" alt="">
-    <div class="slider-container">
-      <label for="editorFont">Editor Font</label>
-      <div id="editorFont" class="slider"></div>
-      <label for="consoleFont">Console Font</label>
-      <div id="consoleFont" class="slider"></div>
+    <div class="navigation-left">
+      <img src="./img/logo.png" class="navigation-logo" alt="">
+    </div>
+    <div class="navigation-center">
+        <h4 id="session-title" class="navigation-title"></h4>
+    </div>
+    <div class="navigation-right">
+      <div class="dropdown">
+          <i class="fa fa-cog navigation-settings-icon" data-toggle="dropdown"></i>
+          <ul class="dropdown-menu">
+              <div class="slider-container">
+                <div class="slider-content">
+                  <label for="editorFont">Editor Font</label>
+                  <div id="editorFont" class="slider"></div>  
+                </div>
+                <div class="slider-content">  
+                  <label for="consoleFont">Console Font</label>
+                  <div id="consoleFont" class="slider"></div>
+                </div>
+              </div>              
+          </ul>
+        </div>
     </div>
   </div>
   <table class="wrapper">
     <tr>
-    <td class="editor-container resizable">
-      <div class="editor-controls">
-        <a class="editor-btn" data-action="run">
-          Run <i class="fa fa-play"></i>
-        </a>
-      </div>
-      <div id="editor" class="editor"></div>
-    </td>
-    <td class="console-container">
-      <div id="console" class="console">
-        <a class="jqconsole-btn" data-action="clear-console">Clear</a>
-      </div>
-    </td>
+      <td class="editor-container resizable">
+        <div class="editor-controls">
+          <a class="btn btn-rounded editor-btn" data-action="run">
+              <i class="fa fa-play"></i>
+            </a>
+          <a class="btn btn-rounded editor-btn" data-action="new">
+              <i class="fa fa-plus"></i>
+          </a>
+          <a class="btn btn-rounded editor-btn" data-action="save">
+              <i class="fa fa-save"></i>
+          </a>
+          <a class="btn btn-rounded editor-btn" data-action="load" data-toggle="modal" data-target="#sessionsModal">
+                <i class="fa fa-folder-open-o"></i>
+          </a>
+
+        </div>
+        <div id="editor" class="editor"></div>
+      </td>
+      <td class="console-container">
+        <div id="console" class="console">
+          <a class="jqconsole-btn" data-action="clear-console">Clear</a>
+        </div>
+      </td>
     </tr>
   </table>
+
+  <!-- Sessions Modal -->
+  <div id="sessionsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Load</h4>
+        </div>
+        <div class="modal-body">
+          <div class="card-container" id="sessions-container">
+              <h4 class="text-center">There are no sessions to load!</h4>      
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>            
+
 </body>
 
 <!-- SCRIPTS -->
@@ -107,8 +166,9 @@
 <script type="text/javascript" src="./js/init-brython.js"></script>
 <script type="text/javascript" src="./js/init-ace.js"></script>
 <script type="text/javascript" src="./js/init-jqconsole.js"></script>
+<script type="text/javascript" src="./js/init-jquery-ui.js"></script>
+<script type="text/javascript" src="./js/init-localstorage.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
-
 <!-- PYTHON -->
 <script type="text/python">
   from browser import window
@@ -125,3 +185,6 @@
 </script>
 
 </html>
+
+
+  
