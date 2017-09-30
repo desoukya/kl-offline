@@ -1,7 +1,7 @@
 let CURRENT_SESSION_INDEX = undefined;
 
 const loadSession = function(sessionIndex) {
-    const SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
+    const SESSIONS = loadSessionsArray();
     var session = SESSIONS[sessionIndex] || {};
     var code = session.code || '';
     editor.setValue(code, 1);
@@ -12,7 +12,7 @@ const loadSession = function(sessionIndex) {
 
 
 const deleteSession = function(sessionIndex) {
-    let SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
+    let SESSIONS = loadSessionsArray();
     SESSIONS.splice(sessionIndex, 1);
     localStorage.setItem('SESSIONS', JSON.stringify(SESSIONS));
     if (CURRENT_SESSION_INDEX === undefined) {
@@ -31,7 +31,7 @@ const deleteSession = function(sessionIndex) {
 };
 
 const loadAllSessionsToModal = function(sessionIndex) {
-    const SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
+    const SESSIONS = loadSessionsArray();
     $('#sessions-container').empty();
     if (SESSIONS.length) {
         for (var index = 0; index < SESSIONS.length; index++) {
@@ -44,8 +44,7 @@ const loadAllSessionsToModal = function(sessionIndex) {
         $('[data-action="load-session"').click(function(event) {
             let sessionIndex = $(event.currentTarget).attr('data-id') || 0;
             sessionIndex = parseInt(sessionIndex, 10);
-            loadSession(sessionIndex);
-            $('#sessionsModal').modal('hide');
+            handleLoadAction(sessionIndex);
         });
 
         $('[data-action="delete-session"').click(function(event) {
@@ -63,7 +62,7 @@ const saveSession = function({
     sessionName,
     sessionIndex
 }) {
-    let SESSIONS = JSON.parse(localStorage.getItem('SESSIONS')) || [];
+    let SESSIONS = loadSessionsArray();
     const code = editor.getValue();
     if (sessionName) {
         SESSIONS.push({
@@ -170,12 +169,40 @@ const handleNewAction = function() {
 
 }
 
+const handleLoadAction = function(index) {
+    if (CURRENT_SESSION_INDEX === index || (CURRENT_SESSION_INDEX === undefined && editor.getValue().length === 0)) {
+        loadSession(index);
+        $('#sessionsModal').modal('hide');        
+    } else {
+        swal({
+            title: 'Are you sure?',
+            text: 'Please make sure you saved the current session.',
+            showCancelButton: true,
+            confirmButtonText: 'Continue',
+            confirmButtonColor: '#4aa0f1',
+            cancelButtonColor: '#898b8e',
+        }).then(function(sessionName) {
+            loadSession(index);
+            $('#sessionsModal').modal('hide');
+        }, function(dismiss) {
+            return false;
+        });
+    }
+}
 
 // HELPERS
 
 const loadCurrentSessionIndex = function() {
     let index = localStorage.getItem('CURRENT_SESSION_INDEX');
     return index !== undefined && index !== null ? parseInt(index, 10) : undefined;
+}
+
+const loadSessionsArray = function() {
+    const sessionsString = localStorage.getItem('SESSIONS');
+    if (sessionsString) {
+        return JSON.parse(sessionsString);
+    }
+    return [];
 }
 
 const generateNewSessionName = function() {
@@ -192,7 +219,7 @@ if (typeof(Storage) !== 'undefined') {
         loadSession(CURRENT_SESSION_INDEX);
     }
 
-    window.loadSession = (index) => loadSession(index);
+    window.loadSession = (index) => handleLoadAction(index);
 
     window.saveSession = () => handleSaveAction();
 
