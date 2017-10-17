@@ -183,20 +183,6 @@
 <script type="text/javascript" src="./js/init-jquery-ui.js"></script>
 <script type="text/javascript" src="./js/init-localstorage.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
-<!-- PYTHON -->
-<script type="text/python">
-  from browser import window
-  import sys
-
-  def write(data):
-    window.writeResultsToConsole('%s' % data)
-
-  def _exec(code):
-    sys.stdout.write = write
-    exec(code)
-
-  window._exec = _exec
-</script>
 
 </html>
 

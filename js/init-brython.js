@@ -1,3 +1,8 @@
+const resetMain = function() {
+    delete __BRYTHON__.bound.__main__;
+    delete __BRYTHON__.imported.__main__;
+}
+
 window.writeResultsToConsole = function(executedCode) {
     window
         .setUserCodeExecutedThusFar({
@@ -6,34 +11,33 @@ window.writeResultsToConsole = function(executedCode) {
 };
 
 window.exec = function(code) {
-    try {
-        window._exec(code);
-    } catch (e) {
+    resetMain();
+    const results = Brython_Debugger.run_to_end(code, true);
+    if (results.error) {
         window
             .setUserCodeExecutedThusFar({
-                executedCode: e.toString(),
+                executedCode: results.errorState.data,
                 isError: true
+            });
+    } else {
+        window
+            .setUserCodeExecutedThusFar({
+                executedCode: results.stdout,
             });
     }
 };
 
 window.lint = function(code) {
-    // try {
-    //     __BRYTHON__.py2js(code, '', '$');
-    //     return false;
-    // } catch (e) {
-    //     let position = e.$linterPosition;
-    //     let message = e.$linterMessage;
-    //     let row = e.$linterRow;
-    //     let col = e.$linterCol;
-
-    //     message = message.charAt(0).toUpperCase() + message.slice(1); // Capitalize first letter
-    //     message = message + ", col " + col;
-
-    //     return {
-    //         message,
-    //         row,
-    //         col
-    //     };
-    // }
+    resetMain();
+    const results = Brython_Debugger.start_debugger(code, true);
+    if (results.error) {
+        const errorState = results.errorState;
+        return {
+            message: `${errorState.name}: ${errorState.message}`,
+            row: errorState.line_no - 1,
+            col: errorState.column_no_start
+        };
+    } else {
+        return false;
+    }
 };

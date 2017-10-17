@@ -69,7 +69,7 @@ body {
     background: rgb(221, 221, 221);
     flex: 1 0 auto;
     cursor: col-resize;
-    width: 12px;
+    width: 7px;
 }
 
 .ui-resizable-e>.inner {
