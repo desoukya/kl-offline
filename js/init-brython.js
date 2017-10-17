@@ -1,13 +1,12 @@
 const $B = __BRYTHON__;
 
-const resetMain = function(step_limit = 1500) {
+const resetMain = function(step_limit = 4000) {
     delete __BRYTHON__.bound.__main__;
     delete __BRYTHON__.imported.__main__;
     Brython_Debugger.set_step_limit(step_limit);
 }
 
 const runToEnd = function() {
-    Brython_Debugger.step_debugger();
     const state = Brython_Debugger.get_current_state();
     if (Brython_Debugger.is_last_step()) {
         if (state.err) {
@@ -16,17 +15,25 @@ const runToEnd = function() {
                     executedCode: state.data,
                     isError: true
                 });
+        } else if (state.printout.length > 0) {
+            window
+                .setUserCodeExecutedThusFar({
+                    executedCode: state.printout,
+                });
         }
         Brython_Debugger.stop_debugger();
         return true;
-    }
-    if (state.printout.length > 0) {
+    } else if (state.printout.length > 0) {
         window
             .setUserCodeExecutedThusFar({
                 executedCode: state.printout,
-                cb: runToEnd
+                cb: () => {
+                    Brython_Debugger.step_debugger();
+                    runToEnd();
+                }
             });
     } else {
+        Brython_Debugger.step_debugger();
         return runToEnd();
     }
 };
@@ -44,6 +51,20 @@ window.exec = function(code) {
         runToEnd();
     }
 };
+
+window.interpret = function(code) {
+    try {
+        const res = $B.builtins.exec(code);
+        console.log(res);
+    } catch (err) {
+        for(var propName in err) {
+            propValue = err[propName]
+        
+            console.log(propName,propValue);
+        }        
+        console.log(err.prototype);
+    }
+}
 
 window.lint = function(code) {
     resetMain(100);

@@ -14,13 +14,8 @@ const onInputCallBack = function(stdin) {
         if (stdin.length === 0) {
             return false;
         }
-        try {
-            const stdinModified = stdin.replace(new RegExp('\'', 'g'), '"');
-            window._exec(`print(eval('${stdinModified}'))`);
-        } catch (error) {
-            window.exec(stdin);
-            return false;
-        }
+        const stdinModified = stdin.replace(new RegExp('\'', 'g'), '"');
+        window.interpret(stdin);
     }, 0);
     return false;
 };
