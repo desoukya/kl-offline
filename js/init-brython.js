@@ -1,6 +1,4 @@
-const $B = __BRYTHON__;
-
-const resetMain = function(step_limit = 4000) {
+const reset = function(step_limit = 4000) {
     delete __BRYTHON__.bound.__main__;
     delete __BRYTHON__.imported.__main__;
     Brython_Debugger.set_step_limit(step_limit);
@@ -21,6 +19,7 @@ const runToEnd = function() {
                     executedCode: state.printout,
                 });
         }
+        reset();
         Brython_Debugger.stop_debugger();
         return true;
     } else if (state.printout.length > 0) {
@@ -39,7 +38,7 @@ const runToEnd = function() {
 };
 
 window.exec = function(code) {
-    resetMain();
+    reset();
     const results = Brython_Debugger.start_debugger(code, true);
     if (results.error) {
         window
@@ -54,20 +53,36 @@ window.exec = function(code) {
 
 window.interpret = function(code) {
     try {
-        const res = $B.builtins.exec(code);
-        console.log(res);
+        const old = __BRYTHON__.stdout.write;
+        __BRYTHON__.stdout.write = function(message) {
+            window
+                .setUserCodeExecutedThusFar({
+                    executedCode: message,
+                });
+        };
+        const res = __BRYTHON__.builtins.exec(code, __BRYTHON__.builtins.dict());
+        window
+            .setUserCodeExecutedThusFar({
+                executedCode: String(res),
+            });
+        __BRYTHON__.stdout.write = old;
     } catch (err) {
-        for(var propName in err) {
-            propValue = err[propName]
-        
-            console.log(propName,propValue);
-        }        
-        console.log(err.prototype);
+        if (err.__name__ && err.args) {
+            const message = `${err.__name__}: ${err.args[0]}`;
+            console.log(message);
+            window
+                .setUserCodeExecutedThusFar({
+                    executedCode: message,
+                    isError: true
+                });
+        } else {
+            console.log(err);
+        }
     }
 }
 
 window.lint = function(code) {
-    resetMain(100);
+    reset(100);
     code = code.replace(new RegExp('input', 'g'), 'print');
     const results = Brython_Debugger.start_debugger(code, true);
     Brython_Debugger.stop_debugger();
