@@ -3,7 +3,13 @@ jQuery.hotkeys.options.filterInputAcceptingElements = false;
 // EDITOR EVENTS
 
 $('[data-action="run"]').click(function() {
-    window.exec(editor.getValue());
+    $('#run>.fa-circle').removeClass('hidden');
+    $('#run>.fa-play').addClass('hidden');
+    setTimeout(() => {
+        window.exec(editor.getValue());
+        $('#run>.fa-play').removeClass('hidden');
+        $('#run>.fa-circle').addClass('hidden');    
+    }, 200);
 });
 
 editor.on('input', (change) => {

@@ -49,7 +49,8 @@ const initJqConsole = function() {
 
 window.setUserCodeExecutedThusFar = function({
     executedCode,
-    isError
+    isError,
+    cb
 }) {
     var className = isError ?
         'jqconsole-error' :
@@ -63,6 +64,11 @@ window.setUserCodeExecutedThusFar = function({
     this
         .jqconsole
         .Focus();
+    if (cb) {
+        setTimeout(function(){
+          cb();
+       }, 0);
+    }
 };
 
 window.focus = function() {
