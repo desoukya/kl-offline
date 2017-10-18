@@ -3,22 +3,30 @@ jQuery.hotkeys.options.filterInputAcceptingElements = false;
 // EDITOR EVENTS
 
 $('[data-action="run"]').click(function() {
-    window.exec(editor.getValue());
+    $('#run>.fa-spinner').removeClass('hidden');
+    $('#run>.fa-play').addClass('hidden');
+    setTimeout(() => {
+        window.exec(editor.getValue(), () => {
+            $('#run>.fa-play').removeClass('hidden');
+            $('#run>.fa-spinner').addClass('hidden');
+        });
+    }, 200);
 });
 
 editor.on('input', (change) => {
+    if (Brython_Debugger.is_debugging()) {
+        return;
+    }
     const syntaxError = window.lint(editor.getValue());
-    if(syntaxError) {
-      this.editor.getSession().setAnnotations([
-        {
-          row: syntaxError.row,
-          column: syntaxError.col,
-          text: syntaxError.message,
-          type: 'error'
-        }
-      ]);
+    if (syntaxError) {
+        this.editor.getSession().setAnnotations([{
+            row: syntaxError.row,
+            column: syntaxError.col,
+            text: syntaxError.message,
+            type: 'error'
+        }]);
     } else {
-      this.editor.getSession().setAnnotations([]);
+        this.editor.getSession().setAnnotations([]);
     }
 });
 
@@ -60,7 +68,7 @@ $('#console').bind('keydown', 'ctrl+l', function(event) {
 // BOOTSTRAP
 
 // Prevent dropdown from closing on click inside
-$(document).on('click', '.dropdown-menu', function (e) {
+$(document).on('click', '.dropdown-menu', function(e) {
     e.stopPropagation();
 });
 

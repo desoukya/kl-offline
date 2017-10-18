@@ -14,13 +14,8 @@ const onInputCallBack = function(stdin) {
         if (stdin.length === 0) {
             return false;
         }
-        try {
-            const stdinModified = stdin.replace(new RegExp('\'', 'g'), '"');
-            window._exec(`print(eval('${stdinModified}'))`);
-        } catch (error) {
-            window.exec(stdin);
-            return false;
-        }
+        const stdinModified = stdin.replace(new RegExp('\'', 'g'), '"');
+        window.interpret(stdin);
     }, 0);
     return false;
 };
@@ -49,7 +44,8 @@ const initJqConsole = function() {
 
 window.setUserCodeExecutedThusFar = function({
     executedCode,
-    isError
+    isError,
+    cb
 }) {
     var className = isError ?
         'jqconsole-error' :
@@ -63,6 +59,11 @@ window.setUserCodeExecutedThusFar = function({
     this
         .jqconsole
         .Focus();
+    if (cb) {
+        setTimeout(function(){
+          cb();
+       }, 0);
+    }
 };
 
 window.focus = function() {

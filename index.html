@@ -7,6 +7,13 @@
   <link rel="icon" sizes="16x16 32x32 64x64" href="./img/favicon.ico?v=2">
 
   <!-- BRYTHON SCRIPTS -->
+  <script type="text/javascript" src="./lib/brython/src/brython_dist.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/builtins_docstrings.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/identifiers_re.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/local_storage_fs.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_VFS.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/async.js"></script>
+
   <script type="text/javascript" src="./lib/brython/src/brython_builtins.js"></script>
   <script type="text/javascript" src="./lib/brython/src/version_info.js"></script>
   <script type="text/javascript" src="./lib/brython/src/py2js.js"></script>
@@ -34,6 +41,10 @@
   <script type="text/javascript" src="./lib/brython/src/py_generator.js"></script>
   <script type="text/javascript" src="./lib/brython/src/py_dom.js"></script>
 
+  <script type="text/javascript" src="./lib/brython/src/debugger/acorn.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/debugger/interpreter.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/debugger/main.js"></script>
+
   <script type="text/javascript" src="./lib/brython/src/builtin_modules.js"></script>
   <script type="text/javascript" src="./lib/brython/src/py_import_hooks.js"></script>
 
@@ -49,18 +60,17 @@
   <!-- JQCONSOLE -->
   <script type="text/javascript" src="./lib/jqconsole/jqconsole.js"></script>
 
-
   <!-- MOMENT -->
-  
+
   <script type="text/javascript" src="./node_modules/moment/min/moment.min.js"></script>
-  
+
   <!-- SWEET ALERT -->
   <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
-  <script type="text/javascript" src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>  
+  <script type="text/javascript" src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 
   <!-- JQUERY.HOTKEYS -->
   <script type="text/javascript" src="./node_modules/jquery.hotkeys/jquery.hotkeys.js"></script>
-  
+
   <!-- BOOTSTRAP -->
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -69,7 +79,7 @@
   <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
 
   <!-- STYLE SHEETS -->
-  <link rel="stylesheet" href="./css/components/card.css">  
+  <link rel="stylesheet" href="./css/components/card.css">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/editor.css">
   <link rel="stylesheet" href="./css/_jqconsole.css">
@@ -77,55 +87,71 @@
 
 </head>
 
-<body onload="brython()">
+<body onload="brython(1)">
   <div class="navigation">
     <div class="navigation-left">
       <img src="./img/logo.png" class="navigation-logo" alt="">
     </div>
     <div class="navigation-center">
-        <h4 id="session-title" class="navigation-title"></h4>
+      <h4 id="session-title" class="navigation-title"></h4>
     </div>
     <div class="navigation-right">
       <div class="dropdown">
-          <i class="fa fa-cog navigation-settings-icon" data-toggle="dropdown"></i>
-          <ul class="dropdown-menu">
-              <div class="slider-container">
-                <div class="slider-content">
-                  <label for="editorFont">Editor Font</label>
-                  <div id="editorFont" class="slider"></div>  
-                </div>
-                <div class="slider-content">  
-                  <label for="consoleFont">Console Font</label>
-                  <div id="consoleFont" class="slider"></div>
-                </div>
-              </div>              
-          </ul>
-        </div>
+        <i class="fa fa-cog navigation-settings-icon" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu">
+          <div class="slider-container">
+            <div class="slider-content">
+              <label for="editorFont">Editor Font</label>
+              <div id="editorFont" class="slider"></div>
+            </div>
+            <div class="slider-content">
+              <label for="consoleFont">Console Font</label>
+              <div id="consoleFont" class="slider"></div>
+            </div>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
   <table class="wrapper">
     <tr>
       <td class="editor-container resizable">
         <div class="editor-controls">
-          <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Run" data-placement="bottom" data-action="run">
-              <i class="fa fa-play"></i>
+          <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Run" data-placement="bottom" data-action="run" id="run">
+            <i class="fa fa-play"></i>
+            <i class="fa fa-spinner fa-pulse fa-fw hidden"></i>
+          </button>
+          <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Debug" data-placement="bottom" data-action="start-debugger" id="start-debugger">
+              <i class="fa fa-bug"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="New" data-placement="bottom" data-action="new">
-              <i class="fa fa-plus"></i>
+            <i class="fa fa-plus"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Save [Ctrl+S]" data-placement="bottom" data-action="save">
-              <i class="fa fa-save"></i>
+            <i class="fa fa-save"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Load" data-placement="bottom" data-action="load-sessions-to-modal">
-                <i class="fa fa-folder-open-o"></i>
+            <i class="fa fa-folder-open-o"></i>
           </button>
 
         </div>
         <div id="editor" class="editor"></div>
       </td>
       <td class="console-container">
+        <div class="console-controls">
+          <button class="btn btn-default console-btn debug-control" data-action="back-debugger" id="back-debugger" disabled>
+            <i class="fa fa-backward"></i>
+          </button>
+          <button class="btn btn-default console-btn debug-control" data-action="stop-debugger" id="stop-debugger">
+            <i class="fa fa-stop" style="color: red"></i>
+          </button>
+          <button class="btn btn-default console-btn debug-control" data-action="step-debugger" id="step-debugger">
+            <i class="fa fa-forward"></i>
+          </button>
+
+          <a class="btn btn-default console-btn" data-action="clear-console">Clear</a>
+        </div>
         <div id="console" class="console">
-          <a class="jqconsole-btn" data-action="clear-console">Clear</a>
         </div>
       </td>
     </tr>
@@ -134,7 +160,7 @@
   <!-- Sessions Modal -->
   <div id="sessionsModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-  
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -143,16 +169,16 @@
         </div>
         <div class="modal-body">
           <div class="card-container" id="sessions-container">
-              <h4 class="text-center">There are no sessions to load!</h4>      
+            <h4 class="text-center">There are no sessions to load!</h4>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-  
+
     </div>
-  </div>            
+  </div>
 
 </body>
 
@@ -166,28 +192,12 @@
 <script type="text/javascript" src="./lib/ace-builds/src-min-noconflict/theme-xcode.js"></script>
 
 <!-- MAIN -->
-<script type="text/javascript" src="./js/init-brython.js"></script>
 <script type="text/javascript" src="./js/init-ace.js"></script>
+<script type="text/javascript" src="./js/init-brython.js"></script>
+<script type="text/javascript" src="./js/init-debugger.js"></script>
 <script type="text/javascript" src="./js/init-jqconsole.js"></script>
 <script type="text/javascript" src="./js/init-jquery-ui.js"></script>
 <script type="text/javascript" src="./js/init-localstorage.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
-<!-- PYTHON -->
-<script type="text/python">
-  from browser import window
-  import sys
-
-  def write(data):
-    window.writeResultsToConsole('%s' % data)
-
-  def _exec(code):
-    sys.stdout.write = write
-    exec(code)
-
-  window._exec = _exec
-</script>
 
 </html>
-
-
-  
