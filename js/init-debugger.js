@@ -18,17 +18,17 @@ function start_debugger() {
     window.jqconsole.Clear();
     window.jqconsole.Disable();
     editor.getSession().setAnnotations([]);    
-    var src = editor.getValue();
+    let src = editor.getValue();
     try {
         Debugger.on_debugging_started(debug_started);
         Debugger.on_debugging_end(debug_stoped);
         Debugger.on_debugging_error(debug_error);
         Debugger.on_step_update(debug_step);        
-        var hist = Debugger.start_debugger(src, true);
+        let hist = Debugger.start_debugger(src, true);
     } finally {
     }
     if (hist.error) {
-        var state = hist.errorState;
+        let state = hist.errorState;
         stop_debugger();
         window
         .setUserCodeExecutedThusFar({
