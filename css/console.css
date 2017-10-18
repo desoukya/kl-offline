@@ -3,3 +3,48 @@
     height: 100%;
     background: rgb(14, 22, 40);
 }
+
+.console-container>#console {
+    min-height: calc(100% - 55px);
+}
+
+.console-container>.console-controls {
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.console-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 29px;
+    width: 100px;
+    font-size: 14px;
+    color: rgb(118, 119, 119);
+    border: 1px solid rgb(118, 119, 119);
+    outline: 0px;
+    background: transparent;
+    cursor: pointer;
+    margin-left: 0px;
+    line-height: 10px;
+    z-index: 10;
+}
+
+.console-controls>.debug-control {
+    display: none;
+}
+
+.console-container.show-debugging-controls>.console-controls>.console-btn {
+    display: none;
+}    
+.console-container.show-debugging-controls>.console-controls>.debug-control {
+    display: flex;
+}
+
+.console-btn:hover {
+    color: rgb(14, 22, 40);
+    background: rgb(118, 119, 119);
+}

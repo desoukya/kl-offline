@@ -15,7 +15,7 @@
     z-index: 1000;
 }
 
-.editor-container > .editor-controls > .editor-btn {
+.editor-btn {
     display: flex;
     justify-content: center;
     align-items: center;

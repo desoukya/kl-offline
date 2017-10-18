@@ -7,12 +7,12 @@
   <link rel="icon" sizes="16x16 32x32 64x64" href="./img/favicon.ico?v=2">
 
   <!-- BRYTHON SCRIPTS -->
-	<script type="text/javascript" src="./lib/brython/src/brython_dist.js"></script>
-	<script type="text/javascript" src="./lib/brython/src/builtins_docstrings.js"></script>
-	<script type="text/javascript" src="./lib/brython/src/identifiers_re.js"></script>
-	<script type="text/javascript" src="./lib/brython/src/local_storage_fs.js"></script>
-	<script type="text/javascript" src="./lib/brython/src/py_VFS.js"></script>
-	<script type="text/javascript" src="./lib/brython/src/async.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/brython_dist.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/builtins_docstrings.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/identifiers_re.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/local_storage_fs.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/py_VFS.js"></script>
+  <script type="text/javascript" src="./lib/brython/src/async.js"></script>
 
   <script type="text/javascript" src="./lib/brython/src/brython_builtins.js"></script>
   <script type="text/javascript" src="./lib/brython/src/version_info.js"></script>
@@ -60,18 +60,17 @@
   <!-- JQCONSOLE -->
   <script type="text/javascript" src="./lib/jqconsole/jqconsole.js"></script>
 
-
   <!-- MOMENT -->
-  
+
   <script type="text/javascript" src="./node_modules/moment/min/moment.min.js"></script>
-  
+
   <!-- SWEET ALERT -->
   <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
-  <script type="text/javascript" src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>  
+  <script type="text/javascript" src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 
   <!-- JQUERY.HOTKEYS -->
   <script type="text/javascript" src="./node_modules/jquery.hotkeys/jquery.hotkeys.js"></script>
-  
+
   <!-- BOOTSTRAP -->
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -80,7 +79,7 @@
   <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
 
   <!-- STYLE SHEETS -->
-  <link rel="stylesheet" href="./css/components/card.css">  
+  <link rel="stylesheet" href="./css/components/card.css">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/editor.css">
   <link rel="stylesheet" href="./css/_jqconsole.css">
@@ -94,24 +93,24 @@
       <img src="./img/logo.png" class="navigation-logo" alt="">
     </div>
     <div class="navigation-center">
-        <h4 id="session-title" class="navigation-title"></h4>
+      <h4 id="session-title" class="navigation-title"></h4>
     </div>
     <div class="navigation-right">
       <div class="dropdown">
-          <i class="fa fa-cog navigation-settings-icon" data-toggle="dropdown"></i>
-          <ul class="dropdown-menu">
-              <div class="slider-container">
-                <div class="slider-content">
-                  <label for="editorFont">Editor Font</label>
-                  <div id="editorFont" class="slider"></div>  
-                </div>
-                <div class="slider-content">  
-                  <label for="consoleFont">Console Font</label>
-                  <div id="consoleFont" class="slider"></div>
-                </div>
-              </div>              
-          </ul>
-        </div>
+        <i class="fa fa-cog navigation-settings-icon" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu">
+          <div class="slider-container">
+            <div class="slider-content">
+              <label for="editorFont">Editor Font</label>
+              <div id="editorFont" class="slider"></div>
+            </div>
+            <div class="slider-content">
+              <label for="consoleFont">Console Font</label>
+              <div id="consoleFont" class="slider"></div>
+            </div>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
   <table class="wrapper">
@@ -119,25 +118,37 @@
       <td class="editor-container resizable">
         <div class="editor-controls">
           <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Run" data-placement="bottom" data-action="run" id="run">
-              <i class="fa fa-play"></i>
-              <i class="fa fa-circle hidden"></i>
+            <i class="fa fa-play"></i>
+            <i class="fa fa-spinner fa-pulse fa-fw hidden"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="New" data-placement="bottom" data-action="new">
-              <i class="fa fa-plus"></i>
+            <i class="fa fa-plus"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Save [Ctrl+S]" data-placement="bottom" data-action="save">
-              <i class="fa fa-save"></i>
+            <i class="fa fa-save"></i>
           </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="Load" data-placement="bottom" data-action="load-sessions-to-modal">
-                <i class="fa fa-folder-open-o"></i>
+            <i class="fa fa-folder-open-o"></i>
           </button>
 
         </div>
         <div id="editor" class="editor"></div>
       </td>
       <td class="console-container">
+        <div class="console-controls">
+          <button class="console-btn debug-control" data-toggle="tooltip" title="Back" data-placement="bottom" data-action="back-debugger">
+            <i class="fa fa-backward"></i>
+          </button>
+          <button class="console-btn debug-control" data-toggle="tooltip" title="Stop" data-placement="bottom" data-action="start-debugger">
+            <i class="fa fa-stop" style="color: red"></i>
+          </button>
+          <button class="console-btn debug-control" data-toggle="tooltip" title="Step" data-placement="bottom" data-action="step-debugger">
+            <i class="fa fa-forward"></i>
+          </button>
+
+          <a class="console-btn" data-action="clear-console">Clear</a>
+        </div>
         <div id="console" class="console">
-          <a class="jqconsole-btn" data-action="clear-console">Clear</a>
         </div>
       </td>
     </tr>
@@ -146,7 +157,7 @@
   <!-- Sessions Modal -->
   <div id="sessionsModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-  
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -155,16 +166,16 @@
         </div>
         <div class="modal-body">
           <div class="card-container" id="sessions-container">
-              <h4 class="text-center">There are no sessions to load!</h4>      
+            <h4 class="text-center">There are no sessions to load!</h4>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-  
+
     </div>
-  </div>            
+  </div>
 
 </body>
 
@@ -186,6 +197,3 @@
 <script type="text/javascript" src="./js/main.js"></script>
 
 </html>
-
-
-  

@@ -37,15 +37,19 @@ const runToEnd = function() {
     }
 };
 
-window.exec = function(code) {
+window.exec = function(code, cb) {
     reset();
     const results = Brython_Debugger.start_debugger(code, true);
+    if (cb) {
+        Brython_Debugger.on_debugging_end(cb);
+    }
     if (results.error) {
         window
             .setUserCodeExecutedThusFar({
                 executedCode: results.errorState.data,
                 isError: true
             });
+        Brython_Debugger.stop_debugger();
     } else {
         runToEnd();
     }

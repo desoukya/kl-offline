@@ -38,9 +38,10 @@ const updateConsoleFontSize = function(value) {
         height: value + 1,
         width: parseInt(value * 2 / 3, 10) - 1
     });
-    $('.jqconsole-btn').css({
-        width: parseInt((value * 100) / 14, 10),
-        height: parseInt((value * 29) / 14, 10)
+    $('.console-btn').css({
+        width: Math.min(parseInt((value * 100) / 14, 10), 150),
+        height: Math.min(parseInt((value * 29) / 14, 10), 50),
+        fontSize: Math.min(value, 23)
     });
 };
 
