@@ -14,6 +14,9 @@ $('[data-action="run"]').click(function() {
 });
 
 editor.on('input', (change) => {
+    if (Brython_Debugger.is_debugging()) {
+        return;
+    }
     const syntaxError = window.lint(editor.getValue());
     if (syntaxError) {
         this.editor.getSession().setAnnotations([{

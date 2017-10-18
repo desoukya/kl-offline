@@ -121,6 +121,9 @@
             <i class="fa fa-play"></i>
             <i class="fa fa-spinner fa-pulse fa-fw hidden"></i>
           </button>
+          <button class="btn btn-rounded editor-btn" data-toggle="tooltip" title="Debug" data-placement="bottom" data-action="start-debugger" id="start-debugger">
+              <i class="fa fa-bug"></i>
+          </button>
           <button class="btn btn-rounded editor-btn session-btn" data-toggle="tooltip" title="New" data-placement="bottom" data-action="new">
             <i class="fa fa-plus"></i>
           </button>
@@ -136,17 +139,17 @@
       </td>
       <td class="console-container">
         <div class="console-controls">
-          <button class="console-btn debug-control" data-toggle="tooltip" title="Back" data-placement="bottom" data-action="back-debugger">
+          <button class="btn btn-default console-btn debug-control" data-action="back-debugger" id="back-debugger" disabled>
             <i class="fa fa-backward"></i>
           </button>
-          <button class="console-btn debug-control" data-toggle="tooltip" title="Stop" data-placement="bottom" data-action="start-debugger">
+          <button class="btn btn-default console-btn debug-control" data-action="stop-debugger" id="stop-debugger">
             <i class="fa fa-stop" style="color: red"></i>
           </button>
-          <button class="console-btn debug-control" data-toggle="tooltip" title="Step" data-placement="bottom" data-action="step-debugger">
+          <button class="btn btn-default console-btn debug-control" data-action="step-debugger" id="step-debugger">
             <i class="fa fa-forward"></i>
           </button>
 
-          <a class="console-btn" data-action="clear-console">Clear</a>
+          <a class="btn btn-default console-btn" data-action="clear-console">Clear</a>
         </div>
         <div id="console" class="console">
         </div>
@@ -191,6 +194,7 @@
 <!-- MAIN -->
 <script type="text/javascript" src="./js/init-ace.js"></script>
 <script type="text/javascript" src="./js/init-brython.js"></script>
+<script type="text/javascript" src="./js/init-debugger.js"></script>
 <script type="text/javascript" src="./js/init-jqconsole.js"></script>
 <script type="text/javascript" src="./js/init-jquery-ui.js"></script>
 <script type="text/javascript" src="./js/init-localstorage.js"></script>

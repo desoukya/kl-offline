@@ -1,11 +1,11 @@
 .editor-container {
     width: 50%;
     height: 100%;
-    background-color: white;    
+    background-color: white;
     z-index: 1000;
 }
 
-.editor-container > .editor-controls {
+.editor-container>.editor-controls {
     height: 40px;
     width: fit-content;
     margin: 0 auto;
@@ -35,11 +35,18 @@
     text-decoration: none;
 }
 
-.editor-container > .editor-controls > .editor-btn:hover {
+.editor-container>.editor-controls>.editor-btn:hover {
     color: rgb(121, 151, 165);
-}    
+}
 
-.editor-container > .editor {
+.editor-container>.editor {
     height: calc(100% - 40px);
-    width: 100%;    
+    width: 100%;
+}
+
+.ace_gutter-cell.ace_pointer {
+    background: url('../img/pointer.png');
+    background-repeat: no-repeat;
+    background-position: -13px center;
+    background-size: cover;
 }
