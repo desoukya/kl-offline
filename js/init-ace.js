@@ -26,4 +26,15 @@ const initAce = function() {
     onResize();
 };
 
+window.gotoLine = function(lineNumber, isError, text) {
+    editor.gotoLine(lineNumber, 1000);
+    editor.getSession().setAnnotations([{
+        row: lineNumber - 1,
+        column: 0,
+        text,
+        type: isError ? 'error' : 'pointer'
+    }]);
+}
+
+
 initAce();

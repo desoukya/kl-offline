@@ -4,7 +4,7 @@ const reset = function(step_limit = 4000) {
     Brython_Debugger.set_step_limit(step_limit);
     Debugger.on_debugging_started(() => {});
     Debugger.on_debugging_error(() => {});
-    Debugger.on_step_update(() => {});        
+    Debugger.on_step_update(() => {});
 }
 
 const runToEnd = function() {
@@ -16,6 +16,7 @@ const runToEnd = function() {
                     executedCode: state.data,
                     isError: true
                 });
+            gotoLine(state.next_line_no, true, `${state.name}: ${state.message}`);
         } else if (state.printout.length > 0) {
             window
                 .setUserCodeExecutedThusFar({
@@ -49,7 +50,7 @@ window.exec = function(code, cb) {
     if (cb) {
         Brython_Debugger.on_debugging_end(cb);
     } else {
-        Brython_Debugger.on_debugging_end(() => {});        
+        Brython_Debugger.on_debugging_end(() => {});
     }
     if (results.error) {
         window
@@ -101,7 +102,7 @@ window.lint = function(code) {
     }
     reset(100);
     code = code.replace(new RegExp('input', 'g'), 'print');
-    Brython_Debugger.on_debugging_end(() => {});            
+    Brython_Debugger.on_debugging_end(() => {});
     const results = Brython_Debugger.start_debugger(code, true);
     Brython_Debugger.stop_debugger();
     if (results.error && results.errorState.name !== 'StepLimitExceededError') {

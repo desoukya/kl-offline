@@ -4,30 +4,28 @@ const doc = function(id) {
     return document.getElementById(id);
 };
 
-const gotoLine = function(lineNumber, isError, text) {
-    editor.gotoLine(lineNumber, 1000);
-    editor.getSession().setAnnotations([{
-        row: lineNumber - 1,
-        column: 0,
-        text,
-        type: isError ? 'error' : 'pointer'
-    }]);
-}
-
 function start_debugger() {
     window.jqconsole.Clear();
     window.jqconsole.Disable();
+    editor.setOptions({readOnly: true})
     editor.getSession().setAnnotations([]);    
     let src = editor.getValue();
+    let hist;
     try {
         Debugger.on_debugging_started(debug_started);
         Debugger.on_debugging_end(debug_stoped);
         Debugger.on_debugging_error(debug_error);
         Debugger.on_step_update(debug_step);        
-        let hist = Debugger.start_debugger(src, true);
-    } finally {
+        hist = Debugger.start_debugger(src, true);
+    } catch(e) {
+        stop_debugger();
+        window
+        .setUserCodeExecutedThusFar({
+            executedCode: e.toString(),
+            isError: true
+        });
     }
-    if (hist.error) {
+    if (hist && hist.error) {
         let state = hist.errorState;
         stop_debugger();
         window
@@ -81,6 +79,7 @@ function debug_stoped() {
     doc('stop-debugger').disabled = true;
     window.clearConsole(); 
     window.jqconsole.Enable();
+    editor.setOptions({readOnly: false})    
     editor.getSession().setAnnotations([]);        
 }   
 
